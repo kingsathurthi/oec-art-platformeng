@@ -7,9 +7,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    {{- $ports := split "," .Values.service.ports }}
+    {{- range $index, $port := $ports }}
+    - name: http{{ $index | replace "_" "-" }}
+      port: {{ $port }}
       protocol: TCP
-      name: http
+      targetPort: http
+    {{- end }}
   selector:
     {{- include "payments-api.selectorLabels" . | nindent 4 }}

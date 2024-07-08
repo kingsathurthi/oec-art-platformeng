@@ -28,7 +28,4 @@ RUN adduser \
     appuser
 USER appuser
 
-EXPOSE 5039
-
-ENTRYPOINT ["dotnet", "payments-api.dll", "--urls", "http://0.0.0.0:5039"]
-
+ENTRYPOINT ["dotnet", "payments-api.dll"]
